@@ -1,11 +1,3 @@
-let pinRain = 0
-let pinSoil = 0
-let pinTouch = 0
-let pinFlame = 0
-let pinPhoto = 0
-let pinTemp = 0
-let dgr = 0
-let Light = 0
 function CW () {
     for (let index = 0; index <= 180; index++) {
         pins.servoWritePin(AnalogPin.P16, index)
@@ -91,18 +83,10 @@ function Fan (action: string) {
 function Cloths (action: string) {
     if (action == "O" || action == "o") {
         dgr = 120
-        for (let index = 0; index < 100; index++) {
-            pins.servoWritePin(AnalogPin.P8, dgr)
-            dgr += -1
-            control.waitMicros(20000)
-        }
+        pins.servoWritePin(AnalogPin.P8, dgr)
     } else if (action == "C" || action == "c") {
         dgr = 20
-        for (let index = 0; index < 100; index++) {
-            pins.servoWritePin(AnalogPin.P8, dgr)
-            dgr += 1
-            control.waitMicros(20000)
-        }
+        pins.servoWritePin(AnalogPin.P8, dgr)
     }
 }
 function CCW () {
@@ -123,6 +107,16 @@ function Pump (action: string) {
         pins.digitalWritePin(DigitalPin.P15, 1)
     }
 }
+let Light = 0
+let dgr = 0
+let pinTemp = 0
+let pinPhoto = 0
+let pinFlame = 0
+let pinTouch = 0
+let pinSoil = 0
+let pinRain = 0
+Cloths("o")
+Windows("o")
 basic.forever(function () {
     Read_Sensor()
     if (pinRain == 1) {
